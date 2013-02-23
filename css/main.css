@@ -28,13 +28,32 @@ h2 {
 
 .list-name {
 	width: 200px;
-	margin: 0 10px 10px 0px;
+	margin: 0 !important;
 	padding: 4px 6px;
 }
 div.list-name {
-	margin: 1px 11px 11px 1px;
+	margin: 1px !important;
 }
 .list-name-btn {
 	height: 30px;
-	width: 30px;
+	width: 40px;
+}
+
+input.list-name-join {
+	-webkit-border-radius: 4px 0 0 4px;
+	-moz-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+}
+button.list-name-join {
+	-webkit-border-radius: 0 4px 4px 0;
+	-moz-border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0;
+}
+
+.btn > i.icon-shopping-cart + span.badge {
+	margin-left: 5px;
+}
+
+form.form-search {
+	margin: 20px 0;
 }

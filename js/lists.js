@@ -1,10 +1,10 @@
-var lists = (function(ko, list) {
+var lists = (function(ko, list, item, searchprovider) {
 	
 	//********** Private methods
 	
 	// Helper to create a new list with the correct dependencies
 	function getNewList(name) {
-		var l = new list(ko);
+		var l = new list(ko, item, searchprovider);
 		if (name) {
 			l.name(name);
 		}
@@ -66,8 +66,9 @@ var lists = (function(ko, list) {
 		currentList: currentList
 	}
 	
-})(ko, list)
+})(ko, list, item, searchprovider)
 
 $(function() {
+	// Apply the list binding
 	ko.applyBindings(lists);
 });

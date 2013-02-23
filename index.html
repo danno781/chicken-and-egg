@@ -15,6 +15,7 @@
 	<script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
 	
 	<!-- DEV -->
+	<script src="js/searchprovider.js"></script>
 	<script src="js/list.js"></script>
 	<script src="js/lists.js"></script>
 	<link href="css/main.css" rel="stylesheet">
@@ -50,7 +51,7 @@
 					<li>
 						<a href="#" class="clearfix" data-bind="click: function() { $parent.editList($index()) }">
 							<div class="pull-left" data-bind="text: name"></div>
-							<button class="btn btn-mini btn-danger pull-right" data-bind="click: function() { $parent.lists.remove($data) }">&times;</button>
+							<button class="btn btn-mini btn-danger pull-right" data-bind="click: function() { $parent.lists.remove($data) }"><i class="icon-remove"></i></button>
 						</a>
 					</li>
 				</ul>
@@ -59,15 +60,35 @@
 		</div>
 		
 		<div class="view" data-bind="visible: view() == 'edit', with: currentList">
-			<div class="clearfix" data-bind="visible: !editingName()">
-				<div class="pull-left list-name" data-bind="text: name"></div>
-				<button class="pull-left list-name-btn" data-bind="click: function() { editingName(true) }"><i class="icon-pencil"></i></button>
+			<div class="clearfix">
+				<div class="pull-left">
+					<div class="clearfix" data-bind="visible: !editingName()">
+						<div class="pull-left list-name" data-bind="text: name"></div>
+						<button class="btn pull-left list-name-btn" data-bind="click: function() { editingName(true) }"><i class="icon-pencil"></i></button>
+					</div>
+					<div class="clearfix" data-bind="visible: editingName">
+						<input type="text" id="listNameEditor" class="pull-left list-name list-name-join" data-bind="value: name, hasfocus: editingName" />
+						<button class="btn pull-left list-name-btn list-name-join" data-bind="click: function() { editingName(false) }"><i class="icon-ok"></i></button>
+					</div>
+				</div>
+				<div class="btn-group pull-right">
+					<button class="btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
+					<button class="btn" data-bind="enable: items().length">
+						<i class="icon-shopping-cart"></i>
+						<span class="badge badge-info" data-bind="visible: items().length, text: items().length"></span>
+					</button>
+				</div>
 			</div>
-			<div class="clearfix" data-bind="visible: editingName">
-				<input type="text" class="pull-left list-name" data-bind="value: name, hasfocus: editingName">
-				<button class="pull-left list-name-btn" data-bind="click: function() { editingName(false) }"><i class="icon-ok"></i></button>
-			</div>
-			<button data-bind="click: function() { $parent.view('home') }">Home</button>
+			<form class="form-search" data-bind="submit: search">
+				<div class="input-append">
+					<input type="text" class="span4 search-query" placeholder="Find products to add to this list" data-bind="value: query">
+					<button type="submit" class="btn">Search</button>
+				</div>
+			</form>
+			<p data-bind="visible: results().length == 0 && query().length">There are no products similar to "<span data-bind="text: query"></span>". Please try again.</p>
+			<ul data-bind="visible: results().length, foreach: results">
+				<li data-bind="text: $data"></li>
+			</ul>
 		</div>
 		
 		<div class="view" data-bind="visible: view() == 'basket'">
