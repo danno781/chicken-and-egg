@@ -1,4 +1,19 @@
-var searchprovider = (function() {
+var searchresult = function(n) {
+	
+	// Name of the item
+	var name = n;
+	
+	// Reference to the item in the list
+	var itemInList = ko.observable(false);
+	
+	return {
+		name: name,
+		itemInList: itemInList
+	}
+	
+};
+
+var searchprovider = (function(searchresult) {
 	
 	//********** Private methods
 	var eligibleItems = [
@@ -18,7 +33,7 @@ var searchprovider = (function() {
 		var results = [];
 		for (var item in eligibleItems) {
 			if (eligibleItems[item].indexOf(query) >= 0) {
-				results.push(eligibleItems[item]);
+				results.push(new searchresult(eligibleItems[item]));
 			}
 		}
 		return results;
@@ -30,4 +45,4 @@ var searchprovider = (function() {
 		search: search
 	}
 	
-})()
+})(searchresult)
