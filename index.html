@@ -58,9 +58,16 @@
 			
 		</div>
 		
-		<div class="view" data-bind="visible: view() == 'edit'">
-			<p>Edit</p>
-			<button data-bind="click: function() { view('home') }">Home</button>
+		<div class="view" data-bind="visible: view() == 'edit', with: currentList">
+			<div class="clearfix" data-bind="visible: !editingName()">
+				<div class="pull-left list-name" data-bind="text: name"></div>
+				<button class="pull-left list-name-btn" data-bind="click: function() { editingName(true) }"><i class="icon-pencil"></i></button>
+			</div>
+			<div class="clearfix" data-bind="visible: editingName">
+				<input type="text" class="pull-left list-name" data-bind="value: name, hasfocus: editingName">
+				<button class="pull-left list-name-btn" data-bind="click: function() { editingName(false) }"><i class="icon-ok"></i></button>
+			</div>
+			<button data-bind="click: function() { $parent.view('home') }">Home</button>
 		</div>
 		
 		<div class="view" data-bind="visible: view() == 'basket'">
