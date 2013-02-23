@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Chicken and Egg</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+	
+	<!-- DEV -->
+	<script src="js/list.js"></script>
+	<script src="js/lists.js"></script>
+	<link href="css/main.css" rel="stylesheet">
+	
+	<!-- PROD -->
+<!-- 	<script src="cae.js"></script> -->
+<!-- 	<link href="cae.css" rel="stylesheet"> -->
+	
+<!-- 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href=""> -->
+<!-- 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href=""> -->
+<!-- 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href=""> -->
+<!-- 	<link rel="apple-touch-icon-precomposed" href=""> -->
+<!-- 	<link rel="shortcut icon" href=""> -->
+</head>
+
+<body>
+
+<div class="container">
+	<div class="window">
+	
+		<div class="view" data-bind="visible: view() == 'home'">
+			<h2>Chicken and Egg</h2>
+	
+			<button class="btn btn-large btn-success add-btn" data-bind="click: newList">Create a list</button>
+			
+			<div data-bind="visible: lists().length < 1">
+				<p>You have no saved shopping lists at the moment.</p>
+			</div>
+			
+			<div data-bind="visible: lists().length > 0">
+				<p>Your saved shopping lists:</p>
+				<ul class="nav nav-tabs nav-stacked" data-bind="foreach: lists">
+					<li>
+						<a href="#" class="clearfix" data-bind="click: function() { $parent.editList($index()) }">
+							<div class="pull-left" data-bind="text: name"></div>
+							<button class="btn btn-mini btn-danger pull-right" data-bind="click: function() { $parent.lists.remove($data) }">&times;</button>
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		
+		<div class="view" data-bind="visible: view() == 'edit'">
+			<p>Edit</p>
+			<button data-bind="click: function() { view('home') }">Home</button>
+		</div>
+		
+		<div class="view" data-bind="visible: view() == 'basket'">
+			<p>Basket</p>
+		</div>
+		
+		<div class="view" data-bind="visible: view() == 'checkout'">
+			<p>Checkout</p>
+		</div>
+		
+		<div class="view" data-bind="visible: view() == 'checkout-detail`'">
+			<p>Checkout detail</p>
+		</div>
+	
+	</div>
+</div>
+
+</body>
+</html>
