@@ -16,6 +16,7 @@
 	
 	<!-- DEV -->
 	<script src="js/searchprovider.js"></script>
+	<script src="js/resultsprovider.js"></script>
 	<script src="js/item.js"></script>
 	<script src="js/list.js"></script>
 	<script src="js/lists.js"></script>
@@ -40,7 +41,7 @@
 		<div class="view" data-bind="visible: view() == 'home'">
 			<h2>Chicken and Egg</h2>
 	
-			<button class="btn btn-large btn-success add-btn" data-bind="click: newList">Create a list</button>
+			<button class="btn btn-large btn-success header-spacer" data-bind="click: newList">Create a list</button>
 			
 			<div data-bind="visible: lists().length < 1">
 				<p>You have no saved shopping lists at the moment.</p>
@@ -51,6 +52,7 @@
 				<ul class="nav nav-tabs nav-stacked" data-bind="foreach: lists">
 					<li>
 						<a href="#" class="clearfix" data-bind="click: function() { $parent.editList($index()) }">
+							<span class="badge badge-info pull-left badge-home-list" data-bind="text: items().length"></span>
 							<div class="pull-left" data-bind="text: name"></div>
 							<button class="btn btn-mini btn-danger pull-right" data-bind="click: function() { $parent.lists.remove($data) }"><i class="icon-remove"></i></button>
 						</a>
@@ -74,7 +76,7 @@
 				</div>
 				<div class="btn-group pull-right">
 					<button class="btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
-					<button class="btn" data-bind="enable: items().length, click: function() { $parent.view('checkout') }">
+					<button class="btn" data-bind="enable: items().length, click: function() { $parent.view('basket') }">
 						<i class="icon-shopping-cart"></i>
 						<span class="badge badge-info" data-bind="visible: items().length, text: items().length"></span>
 					</button>
@@ -86,9 +88,8 @@
 					<button type="submit" class="btn">Search</button>
 				</div>
 			</form>
+			<p data-bind="visible: !query().length">Popular items:</p>
 			<p data-bind="visible: results().length == 0 && query().length">There are no products similar to "<span data-bind="text: query"></span>". Please try again.</p>
-			
-			
 			<ul class="nav nav-tabs nav-stacked" data-bind="visible: results().length, foreach: results">
 				<li>
 					<a href="#" class="clearfix" data-bind="click: function() { }">
@@ -97,8 +98,8 @@
 							<button class="btn btn-mini btn-success" data-bind="click: function() { $parent.addToList($data) }"><i class="icon-plus"></i></button>
 						</div>
 						<div class="btn-group pull-right" data-bind="visible: itemInList">
-							<button class="btn btn-mini" data-bind="click: function() { itemInList().increment(); return false; }"><i class="icon-chevron-up"></i></button>
-							<button class="btn btn-mini" data-bind="click: function() { itemInList().decrement(); return false; }"><i class="icon-chevron-down"></i></button>
+							<button class="btn btn-mini" data-bind="click: function() { itemInList().increment(); }"><i class="icon-chevron-up"></i></button>
+							<button class="btn btn-mini" data-bind="click: function() { itemInList().decrement(); }"><i class="icon-chevron-down"></i></button>
 							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.removeFromList($data) }"><i class="icon-remove"></i></button>
 						</div>
 						<span class="badge badge-info pull-right" data-bind="visible: itemInList, text: itemInList().number">0</span>
@@ -107,12 +108,45 @@
 			</ul>
 		</div>
 		
-		<div class="view" data-bind="visible: view() == 'basket'">
-			<p>Basket</p>
+		<div class="view" data-bind="visible: view() == 'basket', with: currentList">
+			<div class="clearfix">
+				<h2 class="pull-left"><span data-bind="text: name"></span>: Basket</h2>
+				<button class="btn pull-right" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
+			</div>
+			<div class="clearfix header-spacer">
+				<div class="pull-left">
+					<i class="icon-4x icon-shopping-cart"></i>
+					<span class="badge badge-info badge-basket" data-bind="text: items().length"></span>
+				</div>
+				<button class="btn pull-right btn-large" data-bind="click: function() { $parent.view('checkout') }, enable: items().length"><i class="icon-barcode"></i> Checkout</button>
+			</div>
+			<ul class="nav nav-tabs nav-stacked" data-bind="visible: items().length, foreach: items">
+				<li>
+					<a href="#" class="clearfix" data-bind="click: function() { }">
+						<div class="pull-left" data-bind="text: name"></div>
+						<div class="btn-group pull-right">
+							<button class="btn btn-mini" data-bind="click: increment"><i class="icon-chevron-up"></i></button>
+							<button class="btn btn-mini" data-bind="click: decrement"><i class="icon-chevron-down"></i></button>
+							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.items.remove($data) }"><i class="icon-remove"></i></button>
+						</div>
+						<span class="badge badge-info pull-right" data-bind="text: number">0</span>
+					</a>
+				</li>
+			</ul>
+			<button class="btn pull-right btn-large" data-bind="click: function() { $parent.view('edit') }"><i class="icon-plus"></i> Add <span data-bind="text: items().length ? 'more ' : ''"></span>items</button>
 		</div>
 		
-		<div class="view" data-bind="visible: view() == 'checkout'">
-			<p>Checkout</p>
+		<div class="view" data-bind="visible: view() == 'checkout', with: currentList">
+			<div class="clearfix">
+				<h2 class="pull-left"><span data-bind="text: name"></span>: Checkout</h2>
+				<button class="btn pull-right" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
+			</div>
+			<div class="clearfix header-spacer loading-box well" data-bind="visible: loading">
+				<div class="progress progress-striped active" data-bind="css: { 'progress-info': loadingColour() == 'blue', 'progress-success': loadingColour() == 'green', 'progress-warning': loadingColour() == 'orange', 'progress-danger': loadingColour() == 'red' }">
+					<div class="bar" data-bind="style: { width: loadingPercent() + '%' }"></div>
+				</div>
+				<p data-bind="text: loadingMsg"></p>
+			</div>
 		</div>
 		
 		<div class="view" data-bind="visible: view() == 'checkout-detail`'">

@@ -1,4 +1,4 @@
-var list = function(ko, item, searchprovider) {
+var list = function(ko, item, searchprovider, resultsprovider) {
 	
 	//********** Private methods
 	
@@ -8,7 +8,7 @@ var list = function(ko, item, searchprovider) {
 		i.number.subscribe(function(v) {
 			if (v < 1) {
 				items.remove(i);
-				searchresult.itemInList(false);
+				i.searchResultRow().itemInList(false);
 			}
 		});
 		return i;
@@ -25,6 +25,7 @@ var list = function(ko, item, searchprovider) {
 			for (var j in items()) {
 				if (res[i].name == items()[j].name()) {
 					res[i].itemInList(items()[j]);
+					items()[j].searchResultRow(res[i]);
 				}
 			}
 		}
@@ -35,6 +36,7 @@ var list = function(ko, item, searchprovider) {
 	function addToList(searchresult) {
 		var item = createItem(searchresult);
 		items.push(item);
+		item.searchResultRow(searchresult);
 		searchresult.itemInList(item);
 	}
 	
@@ -46,6 +48,20 @@ var list = function(ko, item, searchprovider) {
 				searchresult.itemInList(false);
 			}
 		}
+	}
+	
+	// Gets data from the resultsprovider
+	function getData() {
+		loading(true);
+		loadingMsg("Getting available stores...")
+		resultsprovider.getConnectors(function(data) {
+			loadingPercent(10);
+			loadingMsg("Got stores");
+		}, function() {
+			loadingPercent(100);
+			loadingColour("red");
+			loadingMsg("Unable to connect to import.io, do you have an internet connection?");
+		});
 	}
 	
 	//********** Public variables
@@ -65,6 +81,18 @@ var list = function(ko, item, searchprovider) {
 	// Search results
 	var results = ko.observableArray([]);
 	
+	// Whether or not we are loading
+	var loading = ko.observable(false);
+	
+	// The loading message
+	var loadingMsg = ko.observable("Starting...");
+	
+	// What colour the loading bar should be
+	var loadingColour = ko.observable("blue");
+	
+	// How far loaded we are
+	var loadingPercent = ko.observable(0);
+	
 	return {
 		name: name,
 		editingName: editingName,
@@ -73,7 +101,12 @@ var list = function(ko, item, searchprovider) {
 		search: search,
 		results: results,
 		addToList: addToList,
-		removeFromList: removeFromList
+		removeFromList: removeFromList,
+		getData: getData,
+		loading: loading,
+		loadingMsg: loadingMsg,
+		loadingPercent: loadingPercent,
+		loadingColour: loadingColour
 	}
 	
 };

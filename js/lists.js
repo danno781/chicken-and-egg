@@ -1,10 +1,10 @@
-var lists = (function(ko, list, item, searchprovider) {
+var listObj = function($, ko, list, item, searchprovider, resultsprovider) {
 	
 	//********** Private methods
 	
 	// Helper to create a new list with the correct dependencies
 	function getNewList(name) {
-		var l = new list(ko, item, searchprovider);
+		var l = new list(ko, item, searchprovider, new resultsprovider($));
 		if (name) {
 			l.name(name);
 		}
@@ -45,10 +45,19 @@ var lists = (function(ko, list, item, searchprovider) {
 	// Which view is currently active
 	var view = ko.observable("home");
 	
-	// Blank the current list on going home
+	// Actions when changing screen
 	view.subscribe(function(v) {
+		// Unset the current list when going home
 		if (v == "home") {
 			currentListId(-1);
+		}
+		// When returning to edit, blank the search results
+		if (v == 'edit') {
+			currentList().search('');
+		}
+		// When going to checkout, kick off getting the connectors
+		if (v == 'checkout') {
+			currentList().getData();
 		}
 	})
 	
@@ -66,9 +75,14 @@ var lists = (function(ko, list, item, searchprovider) {
 		currentList: currentList
 	}
 	
-})(ko, list, item, searchprovider)
+}
 
 $(function() {
+	
+	// Create the lists binding
+	var lists = new listObj($, ko, list, item, searchprovider, resultsprovider);
+	
 	// Apply the list binding
 	ko.applyBindings(lists);
+	
 });

@@ -22,11 +22,15 @@ var item = function(ko, startName) {
 	// The count of the item in the basket
 	var number = ko.observable(1);
 	
+	// Reference to the search result row
+	var searchResultRow = ko.observable(false);
+	
 	return {
 		name: name,
 		number: number,
 		increment: increment,
-		decrement: decrement
+		decrement: decrement,
+		searchResultRow: searchResultRow
 	}
 	
 };

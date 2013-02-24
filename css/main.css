@@ -18,7 +18,7 @@ h2 {
 	margin: 10px 30px;
 }
 
-.add-btn {
+.header-spacer {
 	margin: 10px 0 20px;
 }
 
@@ -60,4 +60,27 @@ form.form-search {
 
 ul.nav-stacked li span.badge {
 	margin: 2px 3px 0 0;
+}
+
+span.badge-basket {
+	position: relative;
+	left: -15px;
+	top: -35px;
+}
+
+ul.nav-stacked li span.badge.badge-home-list {
+	margin-right: 5px;
+}
+
+div.loading-box {
+	text-align: center;
+}
+div.loading-box > p,
+div.loading-box > div {
+	width: 70%;
+	margin: 0 auto;
+}
+div.loading-box  > p {
+	margin-top: 10px;
+	margin-bottom: -5px;
 }

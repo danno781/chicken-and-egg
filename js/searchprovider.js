@@ -16,6 +16,9 @@ var searchresult = function(n) {
 var searchprovider = (function(searchresult) {
 	
 	//********** Private methods
+	
+	//********** Private variables
+	
 	var eligibleItems = [
 	                     "egg",
 	                     "doughnut",
@@ -24,8 +27,6 @@ var searchprovider = (function(searchresult) {
 	                     "coffee",
 	                     "tea"
 	                     ];
-	
-	//********** Private variables
 	
 	//********** Public methods
 	
