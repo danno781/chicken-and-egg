@@ -84,3 +84,12 @@ div.loading-box  > p {
 	margin-top: 10px;
 	margin-bottom: -5px;
 }
+
+div.store-img {
+	height: 140px;
+	width: 215px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: #fff;
+	border: 1px solid #333;
+}

@@ -147,6 +147,14 @@
 				</div>
 				<p data-bind="text: loadingMsg"></p>
 			</div>
+			<ul class="nav nav-tabs nav-stacked" data-bind="visible: stores().length, foreach: stores">
+				<li>
+					<a href="#" class="clearfix" data-bind="click: function() { }">
+						<div class="store-img" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
+						<h4 class="pull-left" data-bind="text: name"></h4>
+					</a>
+				</li>
+			</ul>
 		</div>
 		
 		<div class="view" data-bind="visible: view() == 'checkout-detail`'">

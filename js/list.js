@@ -54,9 +54,11 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	function getData() {
 		loading(true);
 		loadingMsg("Getting available stores...")
-		resultsprovider.getConnectors(function(data) {
+		stores([]); // Temporarily blank the stores until we get new ones
+		resultsprovider.getConnectors(function(connectors) {
 			loadingPercent(10);
-			loadingMsg("Got stores");
+			loadingMsg("Got stores, getting their prices...");
+			stores(connectors);
 		}, function() {
 			loadingPercent(100);
 			loadingColour("red");
@@ -93,6 +95,9 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	// How far loaded we are
 	var loadingPercent = ko.observable(0);
 	
+	// Which stores we are using
+	var stores = ko.observableArray([]);
+	
 	return {
 		name: name,
 		editingName: editingName,
@@ -106,7 +111,8 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 		loading: loading,
 		loadingMsg: loadingMsg,
 		loadingPercent: loadingPercent,
-		loadingColour: loadingColour
+		loadingColour: loadingColour,
+		stores: stores
 	}
 	
 };
