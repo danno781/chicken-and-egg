@@ -15,6 +15,8 @@
 	<script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
 	
 	<!-- DEV -->
+	<script src="js/auth.js"></script>
+	<script src="js/importio.js"></script>
 	<script src="js/searchprovider.js"></script>
 	<script src="js/resultsprovider.js"></script>
 	<script src="js/item.js"></script>
@@ -142,7 +144,7 @@
 				<button class="btn pull-right" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
 			</div>
 			<div class="clearfix header-spacer loading-box well" data-bind="visible: loading">
-				<div class="progress progress-striped active" data-bind="css: { 'progress-info': loadingColour() == 'blue', 'progress-success': loadingColour() == 'green', 'progress-warning': loadingColour() == 'orange', 'progress-danger': loadingColour() == 'red' }">
+				<div class="progress active" data-bind="css: { 'progress-striped': active, 'progress-info': loadingColour() == 'blue', 'progress-success': loadingColour() == 'green', 'progress-warning': loadingColour() == 'orange', 'progress-danger': loadingColour() == 'red' }">
 					<div class="bar" data-bind="style: { width: loadingPercent() + '%' }"></div>
 				</div>
 				<p data-bind="text: loadingMsg"></p>
@@ -150,8 +152,16 @@
 			<ul class="nav nav-tabs nav-stacked" data-bind="visible: stores().length, foreach: stores">
 				<li>
 					<a href="#" class="clearfix" data-bind="click: function() { }">
-						<div class="store-img" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
-						<h4 class="pull-left" data-bind="text: name"></h4>
+						<div class="pull-left">
+								<div class="store-img" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
+								<h4 class="pull-left" data-bind="text: name"></h4>
+						</div>
+						<div class="pull-right">
+							<h2>£<span data-bind="text: price"></span></h2>
+							<p>View Details</p>
+							<div class="label label-success" data-bind="visible: lowest"><i class="icon-ok"></i> Lowest price</div>
+							<div class="label label-important" data-bind="visible: highest"><i class="icon-remove"></i> Highest price</div>
+						</div>
 					</a>
 				</li>
 			</ul>

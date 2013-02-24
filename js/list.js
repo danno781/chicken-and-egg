@@ -2,6 +2,7 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	
 	//********** Private methods
 	
+	// Helper to create a new item
 	function createItem(searchresult) {
 		var i = new item(ko, searchresult.name);
 		// Set behaviour when it goes below zero
@@ -11,7 +12,44 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 				i.searchResultRow().itemInList(false);
 			}
 		});
+		i.costs.subscribe(updateTotals)
 		return i;
+	}
+	
+	// Updates totals on connectors when individual prices are changed
+	function updateTotals() {
+		var lowest = {
+			store: -1,
+			value: 100000000000
+		};
+		var highest = {
+			store: -1,
+			value: 0
+		};
+		for (var s in stores()) {
+			var total = stores()[s].price; // This is function, observable
+			total(0);
+			for (var i in items()) {
+				var cost = items()[i].cost(stores()[s].guid);
+				// Was there a cost found
+				if (cost) {
+					// Increase the total
+					total(Math.round((total() + cost)*100)/100);
+				}
+			}
+			if (total() < lowest.value) {
+				lowest.value = total();
+				lowest.store = s;
+			}
+			if (total() > highest.value) {
+				highest.value = total();
+				highest.store = s;
+			}
+		}
+		for (var s in stores()) {
+			stores()[s].lowest(s == lowest.store);
+			stores()[s].highest(s == highest.store);
+		}
 	}
 	
 	//********** Private variables
@@ -54,11 +92,29 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	function getData() {
 		loading(true);
 		loadingMsg("Getting available stores...")
+		loadingColour('blue');
 		stores([]); // Temporarily blank the stores until we get new ones
 		resultsprovider.getConnectors(function(connectors) {
-			loadingPercent(10);
-			loadingMsg("Got stores, getting their prices...");
+			var initial = 10;
+			loadingPercent(initial);
+			loadingMsg("Getting prices...");
+			for (var i in connectors) {
+				connectors[i].price = ko.observable(0);
+				connectors[i].lowest = ko.observable(false);
+				connectors[i].highest = ko.observable(false);
+			}
 			stores(connectors);
+			for (var i in items()) {
+				resultsprovider.query(items()[i].name(), items()[i].process, function() {
+					loadingPercent(100);
+					loadingColour("red");
+					active(false);
+					loadingMsg("Unable to query import.io");
+				}, function(total) {
+					var change = ((100 - initial) / items().length) * (total/100);
+					loadingPercent(loadingPercent() + change);
+				});
+			}
 		}, function() {
 			loadingPercent(100);
 			loadingColour("red");
@@ -95,6 +151,22 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	// How far loaded we are
 	var loadingPercent = ko.observable(0);
 	
+	// Whether or not loading is currently active
+	var active = ko.observable(false);
+	
+	// Update active when loading is set
+	loading.subscribe(active);
+	loadingPercent.subscribe(function(percent) {
+		if (percent >= 100) {
+			loadingColour('green');
+			active(false);
+			loadingMsg("Pricing completed");
+			setTimeout(function() {
+				loading(false);
+			}, 3000);
+		}
+	});
+	
 	// Which stores we are using
 	var stores = ko.observableArray([]);
 	
@@ -112,7 +184,8 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 		loadingMsg: loadingMsg,
 		loadingPercent: loadingPercent,
 		loadingColour: loadingColour,
-		stores: stores
+		stores: stores,
+		active: active
 	}
 	
 };

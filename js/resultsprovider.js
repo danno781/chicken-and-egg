@@ -1,4 +1,4 @@
-var resultsprovider = function($) {
+var resultsprovider = function($, importio) {
 	
 	//********** Private methods
 		
@@ -12,6 +12,8 @@ var resultsprovider = function($) {
 	
 	var mix = "666feabe-e08c-495b-9326-300e7a20a034";
 	
+	var connectorGuids = [];
+	
 	//********** Public methods
 	
 	// Gets the connectors in the mix and returns them all
@@ -22,19 +24,33 @@ var resultsprovider = function($) {
 			for (var i in connectors) {
 				getConnectors.push(getConnector(connectors[i].connectorGuid));
 			}
+			connectorGuids = [];
 			$.when.apply(this, getConnectors).done(function() {
 				var connectors = [];
 				for (var i in arguments) {
 					connectors.push(arguments[i][0]);
+					connectorGuids.push(arguments[i][0]["guid"]);
 				}
 				okcallback(connectors);
 			}).fail(errorcallback);
 		}).fail(errorcallback);
 	}
 	
+	// Does a query on the mix for the specific terms
+	function query(value, okcallback, errorcallback, progresscallback) {
+		var q = {
+			"input": {
+		        "consumer_product/topic:name": value
+		    },
+		    "connectorGuids": connectorGuids
+		};
+		importio.query(q).done(okcallback).fail(errorcallback).progress(progresscallback);
+	}
+	
 	//********** Public variables
 	
 	return {
-		getConnectors: getConnectors
+		getConnectors: getConnectors,
+		query: query
 	}
 }

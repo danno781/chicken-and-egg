@@ -1,10 +1,10 @@
-var listObj = function($, ko, list, item, searchprovider, resultsprovider) {
+var listObj = function($, ko, list, item, searchprovider, resultsprovider, importio) {
 	
 	//********** Private methods
 	
 	// Helper to create a new list with the correct dependencies
 	function getNewList(name) {
-		var l = new list(ko, item, searchprovider, new resultsprovider($));
+		var l = new list(ko, item, searchprovider, new resultsprovider($, importio));
 		if (name) {
 			l.name(name);
 		}
@@ -79,8 +79,17 @@ var listObj = function($, ko, list, item, searchprovider, resultsprovider) {
 
 $(function() {
 	
+	// Init importio
+	importio.init({
+		"auth": {
+			"userGuid": IMPORTIO_USER_GUID,
+			"apiKey": IMPORTIO_API_KEY 
+		},
+		"timeout": 30
+	});
+	
 	// Create the lists binding
-	var lists = new listObj($, ko, list, item, searchprovider, resultsprovider);
+	var lists = new listObj($, ko, list, item, searchprovider, resultsprovider, importio);
 	
 	// Apply the list binding
 	ko.applyBindings(lists);
