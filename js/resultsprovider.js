@@ -5,7 +5,7 @@ var resultsprovider = function($, importio) {
 	// Gets the data for a single connector
 	function getConnector(connector) {
 		var url = "http://api.import.io/store/connector/" + connector;
-		return $.ajax(url);
+		return $.ajax(url, {"dataType": "json"});
 	}
 	
 	//********** Private variables
@@ -19,7 +19,7 @@ var resultsprovider = function($, importio) {
 	// Gets the connectors in the mix and returns them all
 	function getConnectors(okcallback, errorcallback) {
 		var url = "http://api.import.io/store/mix/" + mix + "/_connector";
-		$.ajax(url).done(function(connectors) {
+		$.ajax(url, {"dataType": "json"}).done(function(connectors) {
 			var getConnectors = [];
 			for (var i in connectors) {
 				getConnectors.push(getConnector(connectors[i].connectorGuid));
