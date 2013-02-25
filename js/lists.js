@@ -85,7 +85,13 @@ $(function() {
 			"userGuid": IMPORTIO_USER_GUID,
 			"apiKey": IMPORTIO_API_KEY 
 		},
-		"timeout": 30
+		"host": "query.qa.import.io",
+		"port": 8888,
+		"connectionCallback": function(msg) {
+			if (msg.channel == "/meta" && msg.data.type == "CONNECTION_CLOSED" && msg.data.reason == "MULTIPLE_CLIENTS") {
+				alert("You have multiple Chicken and Egg windows open. Please close this window.");
+			}
+		}
 	});
 	
 	// Create the lists binding
