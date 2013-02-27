@@ -108,7 +108,7 @@
 		<div class="view" data-bind="visible: view() == 'basket', with: currentList">
 			<div class="clearfix">
 				<h3 class="pull-left"><span data-bind="text: name"></span>: Basket</h3>
-				<button class="btn pull-right" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
+				<button class="btn pull-right home-btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
 			</div>
 			<div class="clearfix header-spacer">
 				<div class="pull-left">
@@ -136,7 +136,7 @@
 		<div class="view" data-bind="visible: view() == 'checkout', with: currentList">
 			<div class="clearfix">
 				<h3 class="pull-left"><span data-bind="text: name"></span>: Checkout</h3>
-				<button class="btn pull-right" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
+				<button class="btn pull-right home-btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
 			</div>
 			<div class="clearfix header-spacer loading-box well" data-bind="visible: loading">
 				<div class="progress active" data-bind="css: { 'progress-striped': active, 'progress-info': loadingColour() == 'blue', 'progress-success': loadingColour() == 'green', 'progress-warning': loadingColour() == 'orange', 'progress-danger': loadingColour() == 'red' }">
@@ -147,7 +147,7 @@
 			<ul class="nav nav-tabs nav-stacked" data-bind="visible: stores().length, foreach: stores">
 				<li>
 					<a href="#" class="clearfix" data-bind="click: function() { }">
-						<div class="pull-left">
+						<div class="pull-left store-heading">
 								<div class="store-img" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
 								<h4 class="pull-left" data-bind="text: name"></h4>
 						</div>

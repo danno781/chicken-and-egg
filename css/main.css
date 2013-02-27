@@ -86,6 +86,12 @@ div.loading-box  > p {
 	margin-bottom: -5px;
 }
 
+@media (max-width: 479px) {
+	div.store-heading {
+		width: 100%;
+	}
+}
+
 div.store-img {
 	height: 140px;
 	width: 215px;
@@ -93,4 +99,9 @@ div.store-img {
 	background-position: center center;
 	background-color: #fff;
 	border: 1px solid #333;
+}
+
+.home-btn {
+	margin-top: 5px;
+	margin-bottom: 10px;
 }
