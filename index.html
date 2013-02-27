@@ -154,8 +154,8 @@
 						<div class="pull-right">
 							<h2>£<span data-bind="text: price"></span></h2>
 							<p>View Details</p>
-							<div class="label label-success" data-bind="visible: lowest"><i class="icon-ok"></i> Lowest price</div>
-							<div class="label label-important" data-bind="visible: highest"><i class="icon-remove"></i> Highest price</div>
+							<div class="label label-success" data-bind="visible: (lowest() && $parent.stores().length > 1)"><i class="icon-ok"></i> Lowest price</div>
+							<div class="label label-important" data-bind="visible: (highest() && $parent.stores().length > 1)"><i class="icon-remove"></i> Highest price</div>
 						</div>
 					</a>
 				</li>

@@ -27,6 +27,9 @@ var resultsprovider = function($, importio) {
 			connectorGuids = [];
 			$.when.apply(this, getConnectors).done(function() {
 				var connectors = [];
+				if (getConnectors.length == 1) {
+					arguments = [arguments];
+				}
 				for (var i in arguments) {
 					connectors.push(arguments[i][0]);
 					connectorGuids.push(arguments[i][0]["guid"]);
