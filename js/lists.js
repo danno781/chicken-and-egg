@@ -85,6 +85,8 @@ $(function() {
 			"userGuid": IMPORTIO_USER_GUID,
 			"apiKey": IMPORTIO_API_KEY 
 		},
+		"host": "query.qa.import.io",
+		"port": 8888,
 		"connectionCallback": function(msg) {
 			if (msg.channel == "/meta" && msg.data.type == "CONNECTION_CLOSED" && msg.data.reason == "MULTIPLE_CLIENTS") {
 				alert("You have multiple Chicken and Egg windows open. Please close this window.");
@@ -97,5 +99,14 @@ $(function() {
 	
 	// Apply the list binding
 	ko.applyBindings(lists);
+	
+	// Because JS doesn't support this by default...
+	Number.prototype.money = function() {
+        var n = this, decPlaces = 2, decSeparator = ".", thouSeparator = ",", currencySymbol = "£";
+        sign = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+        return sign + currencySymbol + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+    };
 	
 });

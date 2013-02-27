@@ -25,15 +25,32 @@ var item = function(ko, startName) {
 	}
 	
 	// Mapper for the cost by connector
-	function cost(connector, cost, name) {
+	function cost(connector, cost, n) {
 		if (cost && !(connector in links)) {
-			links[connector] = { "cost": cost, "name": name };
+			console.log(name(), n, cost.money());
+			links[connector] = { "cost": cost, "name": n };
 			updateCosts();
 		}
 		if (!cost && connector in links) {
 			return links[connector].cost * number();
 		}
 		return 0;
+	}
+	
+	// Unit price of item for a connector
+	function each(connector) {
+		if (connector in links) {
+			return links[connector].cost;
+		}
+		return 0;
+	}
+	
+	// Name from the store
+	function storeName(connector) {
+		if (connector in links) {
+			return links[connector].name;
+		}
+		return "";
 	}
 	
 	// Process response data from connector
@@ -71,7 +88,9 @@ var item = function(ko, startName) {
 		cost: cost,
 		costs: costs,
 		process: process,
-		reset: reset
+		reset: reset,
+		each: each,
+		storeName: storeName
 	}
 	
 };

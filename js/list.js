@@ -172,6 +172,9 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	// Which stores we are using
 	var stores = ko.observableArray([]);
 	
+	// Current viewing store
+	var currentStore = ko.observable(false);
+	
 	return {
 		name: name,
 		editingName: editingName,
@@ -187,7 +190,8 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 		loadingPercent: loadingPercent,
 		loadingColour: loadingColour,
 		stores: stores,
-		active: active
+		active: active,
+		currentStore: currentStore
 	}
 	
 };

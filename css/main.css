@@ -105,3 +105,11 @@ div.store-img {
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
+
+.itemprice {
+	max-width: 50%;
+}
+p.subname {
+	color: #333;
+	font-size: 10px;
+}
