@@ -14,19 +14,14 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
 	
-	<!-- DEV -->
 	<script src="js/auth.js"></script>
-	<script src="js/importio.js"></script>
+	<script src="//d7xe6yl2ckrgs.cloudfront.net/js/1/importio.js"></script>
 	<script src="js/searchprovider.js"></script>
 	<script src="js/resultsprovider.js"></script>
 	<script src="js/item.js"></script>
 	<script src="js/list.js"></script>
 	<script src="js/lists.js"></script>
 	<link href="css/main.css" rel="stylesheet">
-	
-	<!-- PROD -->
-<!-- 	<script src="cae.js"></script> -->
-<!-- 	<link href="cae.css" rel="stylesheet"> -->
 	
 <!-- 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href=""> -->
 <!-- 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href=""> -->
@@ -41,7 +36,7 @@
 	<div class="window">
 	
 		<div class="view" data-bind="visible: view() == 'home'">
-			<h2>Chicken and Egg</h2>
+			<h3>Chicken and Egg</h3>
 	
 			<button class="btn btn-large btn-success header-spacer" data-bind="click: newList">Create a list</button>
 			
@@ -112,7 +107,7 @@
 		
 		<div class="view" data-bind="visible: view() == 'basket', with: currentList">
 			<div class="clearfix">
-				<h2 class="pull-left"><span data-bind="text: name"></span>: Basket</h2>
+				<h3 class="pull-left"><span data-bind="text: name"></span>: Basket</h3>
 				<button class="btn pull-right" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
 			</div>
 			<div class="clearfix header-spacer">
@@ -140,7 +135,7 @@
 		
 		<div class="view" data-bind="visible: view() == 'checkout', with: currentList">
 			<div class="clearfix">
-				<h2 class="pull-left"><span data-bind="text: name"></span>: Checkout</h2>
+				<h3 class="pull-left"><span data-bind="text: name"></span>: Checkout</h3>
 				<button class="btn pull-right" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
 			</div>
 			<div class="clearfix header-spacer loading-box well" data-bind="visible: loading">

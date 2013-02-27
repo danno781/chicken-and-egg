@@ -7,15 +7,16 @@ body {
 body, button {
 	font-family: 'Roboto', sans-serif;
 }
-h2 {
+h3 {
 	font-weight: 100;
+	margin-top: 0;
 }
 .container {
 	max-width: 640px;
 	height: 100%;
 }
 .window {
-	margin: 10px 30px;
+	margin: 10px 10px;
 }
 
 .header-spacer {
@@ -27,7 +28,7 @@ h2 {
 }
 
 .list-name {
-	width: 200px;
+	width: 100px;
 	margin: 0 !important;
 	padding: 4px 6px;
 }

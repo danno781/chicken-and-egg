@@ -10,7 +10,7 @@ var resultsprovider = function($, importio) {
 	
 	//********** Private variables
 	
-	var mix = "666feabe-e08c-495b-9326-300e7a20a034";
+	var mix = window.location.hash.replace("#", "");
 	
 	var connectorGuids = [];
 	
