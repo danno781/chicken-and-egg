@@ -43,6 +43,11 @@ var item = function(ko, startName) {
 		}
 	}
 	
+	// Reset the costs for another go
+	function reset() {
+		links = {};
+	}
+	
 	//********** Public variables
 	
 	// The name of the item
@@ -65,7 +70,8 @@ var item = function(ko, startName) {
 		searchResultRow: searchResultRow,
 		cost: cost,
 		costs: costs,
-		process: process
+		process: process,
+		reset: reset
 	}
 	
 };

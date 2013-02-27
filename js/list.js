@@ -105,6 +105,7 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 			}
 			stores(connectors);
 			for (var i in items()) {
+				items()[i].reset();
 				resultsprovider.query(items()[i].name(), items()[i].process, function() {
 					loadingPercent(100);
 					loadingColour("red");
