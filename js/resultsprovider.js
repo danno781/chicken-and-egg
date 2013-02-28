@@ -11,6 +11,9 @@ var resultsprovider = function($, importio) {
 	//********** Private variables
 	
 	var mix = window.location.hash.replace("#", "");
+	if (mix.length != 36) {
+		mix = "666feabe-e08c-495b-9326-300e7a20a034";
+	}
 	
 	var connectorGuids = [];
 	

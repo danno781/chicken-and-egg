@@ -163,8 +163,10 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 			active(false);
 			loadingMsg("Pricing completed");
 			setTimeout(function() {
-				loading(false);
-				loadingPercent(0);
+				if (loadingColour() == 'green') {
+					loading(false);
+					loadingPercent(0);
+				}
 			}, 1000);
 		}
 	});
