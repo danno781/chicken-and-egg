@@ -96,7 +96,7 @@
 						<div class="btn-group pull-right" data-bind="visible: itemInList">
 							<button class="btn btn-mini" data-bind="click: function() { itemInList().increment(); }"><i class="icon-chevron-up"></i></button>
 							<button class="btn btn-mini" data-bind="click: function() { itemInList().decrement(); }"><i class="icon-chevron-down"></i></button>
-							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.removeFromList($data) }"><i class="icon-remove"></i></button>
+							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.removeFromList($data) }"><i class="icon-trash"></i></button>
 						</div>
 						<span class="badge badge-info pull-right" data-bind="visible: itemInList, text: itemInList().number">0</span>
 					</a>
@@ -123,7 +123,7 @@
 						<div class="btn-group pull-right">
 							<button class="btn btn-mini" data-bind="click: increment"><i class="icon-chevron-up"></i></button>
 							<button class="btn btn-mini" data-bind="click: decrement"><i class="icon-chevron-down"></i></button>
-							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.items.remove($data) }"><i class="icon-remove"></i></button>
+							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.items.remove($data) }"><i class="icon-trash"></i></button>
 						</div>
 						<span class="badge badge-info pull-right" data-bind="text: number">0</span>
 					</a>
@@ -155,7 +155,7 @@
 							<h2 data-bind="text: price().money()"></h2>
 							<p>View Details</p>
 							<div class="label label-success" data-bind="visible: (lowest() && $parent.stores().length > 1)"><i class="icon-ok"></i> Lowest price</div>
-							<div class="label label-important" data-bind="visible: (highest() && $parent.stores().length > 1)"><i class="icon-remove"></i> Highest price</div>
+							<div class="label label-important" data-bind="visible: (highest() && $parent.stores().length > 1)"><i class="icon-trash"></i> Highest price</div>
 						</div>
 					</a>
 				</li>
