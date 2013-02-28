@@ -16,12 +16,14 @@ var item = function(ko, startName) {
 	
 	// Increments the number
 	function increment() {
-		number(number() + 1)
+		editing(true);
+		number(number() + 1);
 	}
 	
 	// Decrements the number
 	function decrement() {
-		number(number() - 1)
+		editing(true);
+		number(number() - 1);
 	}
 	
 	// Mapper for the cost by connector
@@ -79,6 +81,25 @@ var item = function(ko, startName) {
 	// Costs linked to this item
 	var costs = ko.observable({});
 	
+	// Whether or not we are editing this property
+	var editing = ko.observable(false);
+	
+	// Whether or not to show the editing
+	var showEditor = ko.observable(false);
+	var timeout = false;
+	editing.subscribe(function(e) {
+		if (e) {
+			if (timeout) {
+				clearTimeout(timeout);
+			}
+			showEditor(true);
+			editing(false);
+			timeout = setTimeout(function() {
+				showEditor(false);
+			}, 3000);
+		}
+	});
+	
 	return {
 		name: name,
 		number: number,
@@ -90,7 +111,9 @@ var item = function(ko, startName) {
 		process: process,
 		reset: reset,
 		each: each,
-		storeName: storeName
+		storeName: storeName,
+		editing: editing,
+		showEditor: showEditor
 	}
 	
 };

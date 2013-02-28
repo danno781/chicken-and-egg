@@ -82,6 +82,10 @@ ul.nav-stacked li span.badge.badge-home-list {
 	margin-right: 5px;
 }
 
+.delete-group {
+	margin-right: 5px;
+}
+
 div.loading-box {
 	text-align: center;
 }
