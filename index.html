@@ -82,7 +82,7 @@
 			</div>
 			<form class="form-search" data-bind="submit: search">
 				<div class="input-append">
-					<input type="text" class="span4 search-query" placeholder="Find products to add to this list" data-bind="value: query">
+					<input type="text" class="span4 search-query" placeholder="Find products to add" data-bind="value: query">
 					<button type="submit" class="btn">Search</button>
 				</div>
 			</form>
@@ -92,9 +92,7 @@
 				<li>
 					<a href="#" class="clearfix" data-bind="click: function() { }">
 						<div class="pull-left" data-bind="text: name"></div>
-						<div class="btn-group pull-right" data-bind="visible: !itemInList()">
-							<button class="btn btn-mini btn-success" data-bind="click: function() { $parent.addToList($data) }"><i class="icon-plus"></i></button>
-						</div>
+						<button class="btn btn-mini btn-success pull-right" data-bind="visible: !itemInList(), click: function() { $parent.addToList($data) }"><i class="icon-plus"></i></button>
 						<div class="btn-group pull-right" data-bind="visible: itemInList">
 							<button class="btn btn-mini" data-bind="click: function() { itemInList().increment(); }"><i class="icon-chevron-up"></i></button>
 							<button class="btn btn-mini" data-bind="click: function() { itemInList().decrement(); }"><i class="icon-chevron-down"></i></button>

@@ -26,7 +26,7 @@ var searchprovider = (function(searchresult) {
 	                     "white bread 800g",
 	                     "pg tips 80 bags",
 	                     "starbucks via",
-	                     "mcvities digestive biscuits 500g",
+	                     "mcvities biscuits 500g",
 	                     "spam 200g",
 	                     "fresh whole chicken",
 	                     "orange juice",
