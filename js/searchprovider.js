@@ -20,23 +20,23 @@ var searchprovider = (function(searchresult) {
 	//********** Private variables
 	
 	var eligibleItems = [
-	                     "12 free range eggs",
-	                     "6 free range eggs",
-	                     "brown bread 800g",
-	                     "white bread 800g",
-	                     "pg tips 80 bags",
-	                     "starbucks via",
-	                     "mcvities biscuits 500g",
-	                     "spam 200g",
-	                     "fresh whole chicken",
-	                     "orange juice",
-	                     "apple juice",
-	                     "pineapple juice",
-	                     "frosties",
-	                     "rice krispies",
-	                     "semi skimmed milk",
-	                     "skimmed milk",
-	                     "whole milk"
+	                     "12 Free range eggs",
+	                     "6 Free range eggs",
+	                     "Brown bread 800g",
+	                     "White bread 800g",
+	                     "PG Tips 80 bags",
+	                     "Starbucks VIA",
+	                     "McVities biscuits 500g",
+	                     "Spam 200g",
+	                     "Fresh whole chicken",
+	                     "Orange juice",
+	                     "Apple juice",
+	                     "Pineapple juice",
+	                     "Frosties",
+	                     "Rice Krispies",
+	                     "Semi skimmed milk",
+	                     "Skimmed milk",
+	                     "Whole milk"
 	                     ];
 	
 	//********** Public methods

@@ -46,7 +46,7 @@ var resultsprovider = function($, importio) {
 	function query(value, okcallback, errorcallback, progresscallback) {
 		var q = {
 			"input": {
-		        "consumer_product/topic:name": value
+		        "consumer_product/topic:name": value.toLowerCase()
 		    },
 		    "connectorGuids": connectorGuids
 		};

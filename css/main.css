@@ -158,6 +158,10 @@ div.view {
 }
 ul.nav-stacked li a {
 	line-height: 30px;
+	color: #000;
+}
+ul.nav-stacked li a:hover {
+	color: #444;
 }
 .input-append .btn {
 	padding: 4px 12px;

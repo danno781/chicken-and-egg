@@ -50,7 +50,7 @@
 				<ul class="nav nav-tabs nav-stacked" data-bind="foreach: lists">
 					<li>
 						<a href="#" class="clearfix" data-bind="click: function() { $parent.editList($index()) }">
-							<span class="badge badge-info pull-left badge-home-list" data-bind="text: items().length"></span>
+							<span class="badge badge-inverse pull-left badge-home-list" data-bind="text: items().length"></span>
 							<div class="pull-left" data-bind="text: name"></div>
 							<button class="btn btn-mini btn-danger pull-right" data-bind="click: function() { $parent.lists.remove($data) }"><i class="icon-trash"></i></button>
 						</a>
@@ -75,9 +75,9 @@
 				<div class="btn-group pull-right">
 					<button class="btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
 					<button class="btn btn-danger" data-bind="click: function() { $('#deleteModal').modal('show'); }"><i class="icon-trash"></i></button>
-					<button class="btn" data-bind="enable: items().length, click: function() { $parent.view('basket') }">
+					<button class="btn" data-bind="enable: items().length, click: function() { $parent.view('basket') }, css: { 'btn-info': items().length }">
 						<i class="icon-shopping-cart"></i>
-						<span class="badge badge-info" data-bind="visible: items().length, text: items().length"></span>
+						<span class="badge badge-inverse" data-bind="visible: items().length, text: items().length"></span>
 					</button>
 				</div>
 			</div>
@@ -99,7 +99,7 @@
 							<button class="btn btn-mini" data-bind="click: function() { itemInList().decrement(); }"><i class="icon-chevron-down"></i></button>
 							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.removeFromList($data) }"><i class="icon-trash"></i></button>
 						</div>
-						<span class="badge badge-info pull-right" data-bind="visible: itemInList, text: itemInList().number">0</span>
+						<span class="badge badge-inverse pull-right" data-bind="visible: itemInList, text: itemInList().number">0</span>
 					</a>
 				</li>
 			</ul>
@@ -116,7 +116,7 @@
 				</div>
 				<div class="modal-footer">
 					<a href="#" class="btn" data-dismiss="modal">Cancel</a>
-					<a href="#" class="btn btn-danger" data-bind="click: function() { $parent.lists.remove($data); $('#deleteModal').modal('hide').on('hidden', function() { $parent.view('home'); }); }"><i class="icon-trash"></i> Delete</a>
+					<a href="#" class="btn btn-danger" data-bind="click: function() { $parent.lists.remove($data); $('#deleteModal').modal('hide').on('hidden', function() { $parent.view('home'); }); }"><i class="icon-trash"></i> Delete list</a>
 				</div>
 			</div>
 			
@@ -132,7 +132,7 @@
 					<i class="icon-4x icon-shopping-cart"></i>
 					<span class="badge badge-info badge-basket" data-bind="text: items().length"></span>
 				</div>
-				<button class="btn pull-right btn-large" data-bind="click: function() { $parent.view('checkout') }, enable: items().length"><i class="icon-barcode"></i> Checkout</button>
+				<button class="btn pull-right btn-large" data-bind="click: function() { $parent.view('checkout') }, enable: items().length, css: { 'btn-info': items().length }"><i class="icon-barcode"></i> Checkout</button>
 			</div>
 			<ul class="nav nav-tabs nav-stacked" data-bind="visible: items().length, foreach: items">
 				<li>
@@ -143,11 +143,11 @@
 							<button class="btn btn-mini" data-bind="click: decrement"><i class="icon-chevron-down"></i></button>
 							<button class="btn btn-mini btn-danger" data-bind="click: function() { $parent.items.remove($data) }"><i class="icon-trash"></i></button>
 						</div>
-						<span class="badge badge-info pull-right" data-bind="text: number">0</span>
+						<span class="badge badge-inverse pull-right" data-bind="text: number">0</span>
 					</a>
 				</li>
 			</ul>
-			<button class="btn pull-right btn-large" data-bind="click: function() { $parent.view('edit') }"><i class="icon-plus"></i> Add <span data-bind="text: items().length ? 'more ' : ''"></span>items</button>
+			<button class="btn pull-right btn-large" data-bind="click: function() { $parent.view('edit') }, css: { 'btn-info': items().length == 0 }"><i class="icon-plus"></i> Add <span data-bind="text: items().length ? 'more ' : ''"></span>items</button>
 		</div>
 		
 		<div class="view clearfix" data-bind="visible: view() == 'checkout', with: currentList">
