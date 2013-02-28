@@ -33,17 +33,22 @@ h3 {
 	padding: 6px 6px;
 }
 div.list-name {
-	margin: 1px !important;
+	border: 1px solid #ccc;
+	border-left-width: 0;
+	background-color: #fff;
 }
 .list-name-btn {
 	height: 34px;
 	width: 40px;
 }
-
-input.list-name-join {
+input.list-name-join,
+div.list-name {
 	-webkit-border-radius: 0 4px 4px 0;
 	-moz-border-radius: 0 4px 4px 0;
 	border-radius: 0 4px 4px 0;
+}
+
+input.list-name-join {
 	padding: 6px 6px;
 }
 button.list-name-join {
