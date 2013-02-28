@@ -149,9 +149,9 @@
 					<a href="#" class="clearfix" data-bind="click: function() { if (!$parent.loading()) { $parent.currentStore($parent.stores()[$index()]); } }">
 						<div class="pull-left store-heading">
 								<div class="store-img" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
-								<h4 class="pull-left" data-bind="text: name"></h4>
+								<h4 data-bind="text: name"></h4>
 						</div>
-						<div class="pull-right">
+						<div class="pull-right store-pricing">
 							<h2 data-bind="text: price().money()"></h2>
 							<p>View Details</p>
 							<div class="label label-success" data-bind="visible: (lowest() && $parent.stores().length > 1)"><i class="icon-ok"></i> Lowest price</div>
@@ -177,9 +177,9 @@
 					</a>
 				</li>
 			</ul>
-			<div class="pull-right" data-bind="visible: currentStore, with: currentStore">
+			<h4 class="pull-right" data-bind="visible: currentStore, with: currentStore">
 				Total cost: <span data-bind="text: price().money()"></span>
-			</div>
+			</h4>
 		</div>
 		
 	</div>
