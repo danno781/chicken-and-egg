@@ -80,7 +80,7 @@
 					</button>
 				</div>
 			</div>
-			<form class="form-search" data-bind="submit: search">
+			<form class="form-search" data-bind="submit: function() { $('.search-query').blur(); search() }">
 				<div class="input-append">
 					<input type="text" class="span4 search-query" placeholder="Find products to add" data-bind="value: query">
 					<button type="submit" class="btn">Search</button>
