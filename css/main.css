@@ -140,6 +140,10 @@ div.store-pricing p {
 	}
 }
 
+div.view {
+	margin-bottom: 30px;
+}
+
 /* More padding */
 .btn {
 	padding: 6px 12px;

@@ -35,7 +35,7 @@
 <div class="container">
 	<div class="window">
 	
-		<div class="view" data-bind="visible: view() == 'home'">
+		<div class="view clearfix" data-bind="visible: view() == 'home'">
 			<h3>Chicken and Egg</h3>
 	
 			<button class="btn btn-large btn-success header-spacer" data-bind="click: newList">Create a list</button>
@@ -59,7 +59,7 @@
 			
 		</div>
 		
-		<div class="view" data-bind="visible: view() == 'edit', with: currentList">
+		<div class="view clearfix" data-bind="visible: view() == 'edit', with: currentList">
 			<div class="clearfix">
 				<div class="pull-left">
 					<div class="clearfix" data-bind="visible: !editingName()">
@@ -67,8 +67,8 @@
 						<div class="pull-left list-name" data-bind="text: name"></div>
 					</div>
 					<div class="clearfix" data-bind="visible: editingName">
-						<button class="btn pull-left list-name-btn list-name-join" data-bind="click: function() { editingName(false) }"><i class="icon-ok"></i></button>
-						<input type="text" id="listNameEditor" maxlength="15" class="pull-left list-name list-name-join" data-bind="value: name, hasfocus: editingName" />
+						<form data-bind="submit: function() { editingName(false) }"><button class="btn pull-left list-name-btn list-name-join" data-bind="click: function() { editingName(false) }"><i class="icon-ok"></i></button>
+						<input type="text" id="listNameEditor" maxlength="15" class="pull-left list-name list-name-join" data-bind="value: name, hasfocus: editingName" /></form>
 					</div>
 				</div>
 				<div class="btn-group pull-right">
@@ -104,7 +104,7 @@
 			</ul>
 		</div>
 		
-		<div class="view" data-bind="visible: view() == 'basket', with: currentList">
+		<div class="view clearfix" data-bind="visible: view() == 'basket', with: currentList">
 			<div class="clearfix">
 				<h3 class="pull-left"><span data-bind="text: name"></span>: Basket</h3>
 				<button class="btn pull-right home-btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
@@ -132,7 +132,7 @@
 			<button class="btn pull-right btn-large" data-bind="click: function() { $parent.view('edit') }"><i class="icon-plus"></i> Add <span data-bind="text: items().length ? 'more ' : ''"></span>items</button>
 		</div>
 		
-		<div class="view" data-bind="visible: view() == 'checkout', with: currentList">
+		<div class="view clearfix" data-bind="visible: view() == 'checkout', with: currentList">
 			<div class="clearfix">
 				<h3 class="pull-left"><span data-bind="text: name"></span>: Checkout</h3>
 				<button class="btn pull-right home-btn" data-bind="visible: !currentStore(), click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
