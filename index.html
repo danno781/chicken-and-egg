@@ -13,6 +13,7 @@
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
 	
 	<script src="js/auth.js"></script>
 	<script src="//d7xe6yl2ckrgs.cloudfront.net/js/1/importio.js"></script>
@@ -73,7 +74,7 @@
 				</div>
 				<div class="btn-group pull-right">
 					<button class="btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
-					<button class="btn btn-danger" data-bind="click: function() { $parent.view('home'); $parent.lists.remove($data) }"><i class="icon-trash"></i></button>
+					<button class="btn btn-danger" data-bind="click: function() { $('#deleteModal').modal('show'); }"><i class="icon-trash"></i></button>
 					<button class="btn" data-bind="enable: items().length, click: function() { $parent.view('basket') }">
 						<i class="icon-shopping-cart"></i>
 						<span class="badge badge-info" data-bind="visible: items().length, text: items().length"></span>
@@ -102,6 +103,23 @@
 					</a>
 				</li>
 			</ul>
+			
+			<div class="modal hide fade" id="deleteModal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3>Confirm deletion</h3>
+				</div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete "<span data-bind="text: name"></span>"?</p>
+					<p data-bind="visible: items().length">It contains <span data-bind="text: items().length"></span> item<span data-bind="visible: items().length > 1">s</span>, which will not be saved.</p>
+					<p data-bind="visible: items().length == 0">This list is currently empty.</p>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+					<a href="#" class="btn btn-danger" data-bind="click: function() { $parent.lists.remove($data); $('#deleteModal').modal('hide').on('hidden', function() { $parent.view('home'); }); }"><i class="icon-trash"></i> Delete</a>
+				</div>
+			</div>
+			
 		</div>
 		
 		<div class="view clearfix" data-bind="visible: view() == 'basket', with: currentList">
