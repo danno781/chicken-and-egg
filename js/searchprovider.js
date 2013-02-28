@@ -42,6 +42,7 @@ var searchprovider = (function(searchresult) {
 	//********** Public methods
 	
 	function search(query) {
+		query = query.toLowerCase();
 		var results = [];
 		for (var item in eligibleItems) {
 			if (eligibleItems[item].indexOf(query) >= 0) {

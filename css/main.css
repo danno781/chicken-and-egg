@@ -154,9 +154,16 @@ div.view {
 ul.nav-stacked li a {
 	line-height: 30px;
 }
-ul.nav-stacked li a .btn-group .btn {
-	padding: 6px 6px;
-}
 .input-append .btn {
 	padding: 4px 12px;
+}
+
+/* Super small screens (iphone) */
+@media (max-width: 420px) {
+	body {
+		padding: 0 5px;
+	}
+	ul.nav-stacked li a .btn-group .btn {
+		padding: 6px 6px;
+	}
 }

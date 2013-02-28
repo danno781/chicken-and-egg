@@ -165,7 +165,7 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 			setTimeout(function() {
 				loading(false);
 				loadingPercent(0);
-			}, 3000);
+			}, 1000);
 		}
 	});
 	
