@@ -64,6 +64,9 @@ button.list-name-join {
 form.form-search {
 	margin: 20px 0;
 }
+a.btn.search-query-clear {
+	padding: 4px 8px;
+}
 
 ul.nav-stacked li span.badge {
 	margin: 6px 3px 0 0;
@@ -175,4 +178,16 @@ ul.nav-stacked li a:hover {
 	ul.nav-stacked li a .btn-group .btn {
 		padding: 6px 6px;
 	}
+}
+
+/* Fix bootstrap button toolbars */
+.form-search .input-append .btn {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+.form-search .input-append .btn:last-child {
+	-webkit-border-radius: 0 14px 14px 0;
+	-moz-border-radius: 0 14px 14px 0;
+	border-radius: 0 14px 14px 0;
 }

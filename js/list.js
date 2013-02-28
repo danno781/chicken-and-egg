@@ -58,6 +58,7 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	
 	// Execute a search
 	function search() {
+		searchedQuery(query());
 		var res = searchprovider.search(query())
 		for (var i in res) {
 			for (var j in items()) {
@@ -137,6 +138,9 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	// A search query string
 	var query = ko.observable("")
 	
+	// The actual query searched for
+	var searchedQuery = ko.observable("");
+	
 	// Search results
 	var results = ko.observableArray([]);
 	
@@ -177,11 +181,30 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 	// Current viewing store
 	var currentStore = ko.observable(false);
 	
+	// Whether or not the search form has focus
+	var searchFormFocus = ko.observable(false);
+	searchFormFocus.subscribe(function (f) {
+		if (f && query().length) {
+			clearButtonVisible(true);
+		} else if (!f) {
+			setTimeout(function() {
+				clearButtonVisible(false)
+			}, 100);
+		}
+	});
+	query.subscribe(function(q) {
+		clearButtonVisible(q.length);
+	});
+	
+	// Whether the search clear button should be visible
+	var clearButtonVisible = ko.observable(false);
+	
 	return {
 		name: name,
 		editingName: editingName,
 		items: items,
 		query: query,
+		searchedQuery: searchedQuery,
 		search: search,
 		results: results,
 		addToList: addToList,
@@ -193,7 +216,9 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 		loadingColour: loadingColour,
 		stores: stores,
 		active: active,
-		currentStore: currentStore
+		currentStore: currentStore,
+		searchFormFocus: searchFormFocus,
+		clearButtonVisible: clearButtonVisible
 	}
 	
 };

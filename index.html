@@ -83,11 +83,12 @@
 			</div>
 			<form class="form-search" data-bind="submit: function() { $('.search-query').blur(); search() }">
 				<div class="input-append">
-					<input type="text" class="span4 search-query" placeholder="Find products to add" data-bind="value: query">
+					<input type="text" class="span4 search-query" placeholder="Find products to add" data-bind="value: query, valueUpdate: 'afterkeydown', hasfocus: searchFormFocus, style: { width: clearButtonVisible() ? '152px' : '180px' }">
+					<a class="btn search-query-clear" data-bind="click: function() { query(''); searchFormFocus(true); search(); }, visible: clearButtonVisible"><i class="icon-remove"></i></a>
 					<button type="submit" class="btn">Search</button>
 				</div>
 			</form>
-			<p data-bind="visible: !query().length">Popular items:</p>
+			<p data-bind="visible: !searchedQuery().length">Popular items:</p>
 			<p data-bind="visible: results().length == 0 && query().length">There are no products similar to "<span data-bind="text: query"></span>". Please try again.</p>
 			<ul class="nav nav-tabs nav-stacked" data-bind="visible: results().length, foreach: results">
 				<li>
