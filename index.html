@@ -89,7 +89,7 @@
 				</div>
 			</form>
 			<p data-bind="visible: !searchedQuery().length">Popular items:</p>
-			<p data-bind="visible: results().length == 0 && query().length">There are no products similar to "<span data-bind="text: query"></span>". Please try again.</p>
+			<p data-bind="visible: results().length == 0 && query().length">There are no products similar to "<span data-bind="text: searchedQuery"></span>". Please try again.</p>
 			<ul class="nav nav-tabs nav-stacked" data-bind="visible: results().length, foreach: results">
 				<li>
 					<a href="#" class="clearfix" data-bind="click: function() { }">
@@ -204,7 +204,7 @@
 							<h2 data-bind="text: price().money()"></h2>
 							<p>View Details</p>
 							<div class="label label-success" data-bind="visible: (lowest() && $parent.stores().length > 1)"><i class="icon-ok"></i> Lowest price</div>
-							<div class="label label-important" data-bind="visible: (highest() && $parent.stores().length > 1)"><i class="icon-trash"></i> Highest price</div>
+							<div class="label label-important" data-bind="visible: (highest() && $parent.stores().length > 1)"><i class="icon-remove"></i> Highest price</div>
 						</div>
 					</a>
 				</li>
@@ -212,6 +212,8 @@
 			<div style="text-align: center" data-bind="visible: currentStore, with: currentStore">
 				<div class="store-img" style="margin: 0 auto 5px;" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
 				<p data-bind="text: name"></p>
+				<div class="label label-success label-margin" data-bind="visible: (lowest() && $parent.stores().length > 1)"><i class="icon-ok"></i> Lowest price</div>
+				<div class="label label-important label-margin" data-bind="visible: (highest() && $parent.stores().length > 1)"><i class="icon-remove"></i> Highest price</div>
 			</div>
 			<ul class="nav nav-tabs nav-stacked" data-bind="visible: currentStore, foreach: items">
 				<li>

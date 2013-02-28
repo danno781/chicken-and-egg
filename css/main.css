@@ -173,6 +173,9 @@ ul.nav-stacked li a:hover {
 .input-append .btn {
 	padding: 4px 12px;
 }
+.label-margin {
+	margin-bottom: 10px;
+}
 
 /* Super small screens (iphone) */
 @media (max-width: 420px) {

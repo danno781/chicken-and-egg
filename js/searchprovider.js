@@ -45,7 +45,7 @@ var searchprovider = (function(searchresult) {
 		query = query.toLowerCase();
 		var results = [];
 		for (var item in eligibleItems) {
-			if (eligibleItems[item].indexOf(query) >= 0) {
+			if (eligibleItems[item].toLowerCase().indexOf(query) >= 0) {
 				results.push(new searchresult(eligibleItems[item]));
 			}
 		}
