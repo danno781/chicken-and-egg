@@ -139,7 +139,10 @@
 		<div class="view clearfix" data-bind="visible: view() == 'basket', with: currentList">
 			<div class="clearfix">
 				<h3 class="pull-left"><span data-bind="text: name"></span>: Basket</h3>
-				<button class="btn pull-right home-btn" data-bind="click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
+				<div class="btn-group home-btn pull-right">
+					<button class="btn" data-bind="click: function() { $parent.view('edit'); }"><i class="icon-plus"></i></button>
+					<button class="btn" data-bind="click: function() { $parent.view('home'); }"><i class="icon-home"></i></button>
+				</div>
 			</div>
 			<div class="clearfix header-spacer">
 				<div class="pull-left">
@@ -177,9 +180,12 @@
 		
 		<div class="view clearfix" data-bind="visible: view() == 'checkout', with: currentList">
 			<div class="clearfix">
-				<h3 class="pull-left"><span data-bind="text: name"></span>: Checkout</h3>
-				<button class="btn pull-right home-btn" data-bind="visible: !currentStore(), click: function() { $parent.view('home') }"><i class="icon-home"></i></button>
-				<button class="btn pull-right home-btn" data-bind="visible: currentStore, click: function() { currentStore(false); }"><i class="icon-arrow-left"></i></button>
+				<h3 class="pull-left"><span data-bind="text: name"></span><br />Checkout</h3>
+				<div class="btn-group home-btn pull-right" data-bind="visible: !currentStore()">
+					<button class="btn" data-bind="click: function() { $parent.view('basket'); }"><i class="icon-shopping-cart"></i></button>
+					<button class="btn" data-bind="click: function() { $parent.view('home'); }"><i class="icon-home"></i></button>
+				</div>
+				<button class="btn btn-info pull-right home-btn" data-bind="visible: currentStore, click: function() { currentStore(false); }"><i class="icon-arrow-left"></i></button>
 			</div>
 			<div class="clearfix header-spacer loading-box well" data-bind="visible: loading">
 				<div class="progress active" data-bind="css: { 'progress-striped': active, 'progress-info': loadingColour() == 'blue', 'progress-success': loadingColour() == 'green', 'progress-warning': loadingColour() == 'orange', 'progress-danger': loadingColour() == 'red' }">
@@ -220,9 +226,14 @@
 					</a>
 				</li>
 			</ul>
-			<h4 class="pull-right" data-bind="visible: currentStore, with: currentStore">
-				Total cost: <span data-bind="text: price().money()"></span>
-			</h4>
+			<div class="clearfix">
+				<h4 class="pull-right" data-bind="visible: currentStore, with: currentStore">
+					Total cost: <span data-bind="text: price().money()"></span>
+				</h4>
+			</div>
+			<div class="clearfix">
+				<button class="btn btn-info pull-right home-btn" data-bind="visible: currentStore, click: function() { currentStore(false); }"><i class="icon-arrow-left"></i></button>
+			</div>
 		</div>
 		
 	</div>
