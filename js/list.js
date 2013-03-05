@@ -98,6 +98,7 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 		resultsprovider.getConnectors(function(connectors) {
 			var initial = 10;
 			loadingPercent(initial);
+			active(true);
 			loadingMsg("Getting prices...");
 			for (var i in connectors) {
 				connectors[i].price = ko.observable(0);
