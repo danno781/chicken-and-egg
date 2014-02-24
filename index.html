@@ -16,7 +16,8 @@
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js"></script>
 	
 	<script src="js/auth.js"></script>
-	<script src="//d7xe6yl2ckrgs.cloudfront.net/js/2/importio.js"></script>
+	<!--<script src="//d7xe6yl2ckrgs.cloudfront.net/js/4/importio.js"></script>-->
+	<script src="js/importio.js"></script>
 	<script src="js/searchprovider.js"></script>
 	<script src="js/resultsprovider.js"></script>
 	<script src="js/item.js"></script>
@@ -197,7 +198,6 @@
 				<li>
 					<a href="#" class="clearfix" data-bind="click: function() { if (!$parent.loading()) { $parent.currentStore($parent.stores()[$index()]); } }">
 						<div class="pull-left store-heading">
-								<div class="store-img" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
 								<h4 data-bind="text: name"></h4>
 						</div>
 						<div class="pull-right store-pricing">
@@ -210,8 +210,7 @@
 				</li>
 			</ul>
 			<div style="text-align: center" data-bind="visible: currentStore, with: currentStore">
-				<div class="store-img" style="margin: 0 auto 5px;" data-bind="style: { 'background-image': 'url(' + imageUrl[0] + ')' }"></div>
-				<p data-bind="text: name"></p>
+				<h4 data-bind="text: name"></h4>
 				<div class="label label-success label-margin" data-bind="visible: (lowest() && $parent.stores().length > 1)"><i class="icon-ok"></i> Lowest price</div>
 				<div class="label label-important label-margin" data-bind="visible: (highest() && $parent.stores().length > 1)"><i class="icon-remove"></i> Highest price</div>
 			</div>

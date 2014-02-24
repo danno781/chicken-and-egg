@@ -58,7 +58,7 @@ var item = function(ko, startName) {
 	// Process response data from connector
 	function process(data) {
 		for (var j in data) {
-			cost(data[j].connectorGuid, data[j].data["consumer_product/msrp/amount"], data[j].data["consumer_product/topic:name"]);
+			cost(data[j].connectorGuid, data[j].data["price"], data[j].data["name"]);
 		}
 	}
 	

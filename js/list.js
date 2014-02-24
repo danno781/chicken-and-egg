@@ -95,7 +95,13 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 		loadingMsg("Getting available stores...")
 		loadingColour('blue');
 		stores([]); // Temporarily blank the stores until we get new ones
-		resultsprovider.getConnectors(function(connectors) {
+		resultsprovider.getConnectors().done(function(data) {
+			var connectors = [];
+			data.hits.hits.map(function(hit) {
+				var c = hit.fields;
+				c.guid = hit._id;
+				connectors.push(c);
+			});
 			var initial = 10;
 			loadingPercent(initial);
 			active(true);
@@ -118,7 +124,7 @@ var list = function(ko, item, searchprovider, resultsprovider) {
 					loadingPercent(loadingPercent() + change);
 				});
 			}
-		}, function() {
+		}).fail(function() {
 			loadingPercent(100);
 			loadingColour("red");
 			loadingMsg("Unable to connect to import.io, do you have an internet connection?");
